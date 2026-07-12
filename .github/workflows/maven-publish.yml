@@ -1,0 +1,61 @@
+name: Publish Maven package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out My Prose
+        uses: actions/checkout@v4
+
+      - name: Check out Prose Builder
+        uses: actions/checkout@v4
+        with:
+          repository: bs-jokri/prose-builder
+          ref: 1.0.0
+          path: vendor/prose-builder
+
+      - name: Set up Java and Maven publishing
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: |
+            pom.xml
+            vendor/prose-builder/pom.xml
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: Install Prose Builder locally
+        run: >
+          mvn -B
+          --no-transfer-progress
+          --file vendor/prose-builder/pom.xml
+          clean install
+          -DskipTests
+
+      - name: Test My Prose
+        run: >
+          mvn -B
+          --no-transfer-progress
+          clean verify
+
+      - name: Publish My Prose
+        run: >
+          mvn -B
+          --no-transfer-progress
+          deploy
+          -DskipTests
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

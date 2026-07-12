@@ -10,7 +10,7 @@
   <!-- Daten deines eigenen Projekts -->
   <groupId>de.htw_berlin.fb4.ossd.melda</groupId>
   <artifactId>sentence-mixer</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>Sentence Mixer</name>

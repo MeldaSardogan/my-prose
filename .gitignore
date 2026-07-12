@@ -1,9 +1,33 @@
+# Maven
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+
+# Java
+*.class
+
+# IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+*.ipr
+
+# Visual Studio Code
 .vscode/
-.classpath
-.project
-.settings/
+
+# Operating systems
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
+
+# Environment files and secrets
+.env
+.env.*
+*.key
+*.pem
+settings.xml

@@ -17,25 +17,28 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java and Maven authentication
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
-          overwrite-settings: false
+          server-id: github
+          server-username: MeldaSardogan
+          server-password: MAVEN_TOKEN
 
-      - name: Configure Maven credentials
-        uses: s4u/maven-settings-action@v4.0.0
-        with:
-          servers: >-
-            [
-              {
-                "id": "prose-builder",
-                "username": "${{ github.actor }}",
-                "password": "${{ secrets.GH_PACKAGES_TOKEN }}"
-              }
-            ]
+      - name: Check package token
+        shell: bash
+        env:
+          PACKAGE_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+        run: |
+          if [ -z "$PACKAGE_TOKEN" ]; then
+            echo "::error::The repository secret GH_PACKAGES_TOKEN is missing."
+            exit 1
+          fi
 
-      - name: Run tests
+      - name: Run Maven tests
+        env:
+          MAVEN_USERNAME: DEIN_GITHUB_USERNAME
+          MAVEN_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: mvn -B -U --no-transfer-progress clean test

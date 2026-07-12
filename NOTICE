@@ -1,0 +1,16 @@
+My Prose
+Copyright 2026 Melda Sardogan
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file distributed with this work.
+
+Project repository:
+https://github.com/DEIN_GITHUB_NAME/my-prose
+
+This product uses the prose-builder library as a Maven dependency.
+The dependency remains subject to its own copyright and license terms.
+
+Cryptography notice:
+This project does not implement or provide cryptographic functionality
+beyond functionality that may be provided by the Java runtime or
+third-party dependencies.

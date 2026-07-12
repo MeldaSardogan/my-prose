@@ -1,3 +1,7 @@
+/*
+ * Copyright 2026 Melda Sardogan
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package de.htw_berlin.fb4.ossd.melda;
 
 import org.junit.jupiter.api.Test;

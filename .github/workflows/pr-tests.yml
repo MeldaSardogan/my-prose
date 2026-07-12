@@ -10,14 +10,14 @@ permissions:
 
 jobs:
   test:
-    name: Maven tests
+    name: Maven Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
+      - name: Repository herunterladen
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Java 21 und Maven einrichten
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -25,10 +25,10 @@ jobs:
           cache: maven
           server-id: github
           server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          server-password: MAVEN_TOKEN
 
-      - name: Run Maven tests
-        run: mvn -B --no-transfer-progress clean test
+      - name: Tests ausführen
+        run: mvn -B -U --no-transfer-progress clean test
         env:
           MAVEN_USERNAME: ${{ github.actor }}
-          MAVEN_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }}
+          MAVEN_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}

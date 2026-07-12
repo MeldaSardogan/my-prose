@@ -18,6 +18,18 @@
     A Maven application that combines sentences using prose-builder.
   </description>
 
+  <url>https://github.com/MeldaSardogan/sentence-mixer</url>
+
+<developers>
+    <developer>
+        <id>MeldaSardogan</id>
+        <name>MeldaSardogan</name>
+        <roles>
+            <role>Developer</role>
+        </roles>
+    </developer>
+</developers>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -94,5 +106,13 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/MeldaSardogan/sentence-mixer</url>
+    </repository>
+</distributionManagement>
 
 </project>

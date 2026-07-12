@@ -7,7 +7,8 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.htw_berlin.fb4.ossd</groupId>
+  <!-- Daten deines eigenen Projekts -->
+  <groupId>de.htw_berlin.fb4.ossd.melda</groupId>
   <artifactId>sentence-mixer</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
@@ -19,13 +20,19 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Das Arbeitsblatt verwendet Java 21. -->
     <maven.compiler.release>21</maven.compiler.release>
-    <junit.version>5.11.4</junit.version>
+
+    <!-- Versionen der Abhängigkeiten -->
     <prose-builder.version>1.0-0</prose-builder.version>
+    <junit.version>5.11.4</junit.version>
   </properties>
 
+  <!-- GitHub Packages Repository des Dozenten -->
   <repositories>
     <repository>
+      <!-- Muss zur ID in ~/.m2/settings.xml passen. -->
       <id>github</id>
       <name>Prose Builder GitHub Packages</name>
       <url>https://maven.pkg.github.com/bs-jokri/prose-builder</url>
@@ -34,19 +41,23 @@
         <enabled>true</enabled>
       </releases>
 
+      <!-- Notwendig für 1.0-SNAPSHOT -->
       <snapshots>
         <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
       </snapshots>
     </repository>
   </repositories>
 
   <dependencies>
+    <!-- Bibliothek aus dem Arbeitsblatt -->
     <dependency>
       <groupId>de.htw_berlin.fb4.ossd</groupId>
       <artifactId>prose_builder</artifactId>
       <version>${prose-builder.version}</version>
     </dependency>
 
+    <!-- Tests für Aufgabe 4 -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -57,26 +68,28 @@
 
   <build>
     <plugins>
+      <!-- Java-Code kompilieren -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
       </plugin>
 
+      <!-- JUnit-5-Tests ausführen -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
       </plugin>
 
+      <!-- App über mvn exec:java starten -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.0</version>
+
         <configuration>
-          <mainClass>
-            de.htw_berlin.fb4.ossd.App
-          </mainClass>
+          <mainClass>de.htw_berlin.fb4.ossd.melda.App</mainClass>
         </configuration>
       </plugin>
     </plugins>
